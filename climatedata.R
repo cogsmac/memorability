@@ -47,8 +47,12 @@ yearsAvailable = 1977:2017
 # gather data from NOAA for each year. This strategy is a little fragile. If there's a problem, check this URL to see if needs updated.
 pullFromFTPURL = paste('ftp://aftp.cmdl.noaa.gov/data/meteorology/in-situ/mlo/met_mlo_insitu_1_obop_hour_', as.character(yearsAvailable[1]) , '.txt', sep = '')
 
+# [todo] create a function to turn the year-month-day-time format into a decimal
+
+for (yearIter in yearsAvailable){
+
 connectToHandle = new_handle(dirlistonly=TRUE)
-   connectionID = curl(pullFromFTPURL, "r", connectToHandle)
-   thisYearData = read.table(connectionID, stringsAsFactors=TRUE, fill=F)
-close(connectionID)
-> head(tbl)
+curl_download('pullFromFTPURL', paste('/_StudyOne/climate/sourceData/', as.character(yearIter), '.csv', sep = ''))
+
+# call function to turn date into decimal
+}
